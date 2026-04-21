@@ -1,0 +1,335 @@
+:root {
+  --bg: #070b14;
+  --text: #f5f8ff;
+  --line: rgba(255, 255, 255, 0.08);
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  position: relative;
+}
+
+/* =========================
+   Background
+========================= */
+
+.bg-gradient,
+.bg-grid,
+.orb,
+.node {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bg-gradient {
+  background:
+    radial-gradient(circle at 50% 22%, rgba(43, 98, 255, 0.24), transparent 30%),
+    radial-gradient(circle at 18% 76%, rgba(132, 232, 95, 0.16), transparent 24%),
+    radial-gradient(circle at 84% 68%, rgba(89, 174, 255, 0.16), transparent 22%),
+    linear-gradient(180deg, #07101b 0%, #060912 48%, #04070d 100%);
+  z-index: -4;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black 34%, transparent 90%);
+  opacity: 0.45;
+  z-index: -3;
+}
+
+.orb {
+  filter: blur(100px);
+  opacity: 0.7;
+  z-index: -2;
+}
+
+.orb-a {
+  inset: auto auto 10% 8%;
+  width: 240px;
+  height: 240px;
+  background: rgba(132, 232, 95, 0.18);
+}
+
+.orb-b {
+  inset: 10% 10% auto auto;
+  width: 300px;
+  height: 300px;
+  background: rgba(47, 101, 255, 0.20);
+}
+
+.orb-c {
+  inset: 34% auto auto 42%;
+  width: 280px;
+  height: 280px;
+  background: rgba(88, 201, 255, 0.16);
+}
+
+.node {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, #d7f7ff 0%, #64a2ff 55%, #2b60ff 100%);
+  box-shadow:
+    0 0 0 8px rgba(101, 166, 255, 0.05),
+    0 0 24px rgba(98, 162, 255, 0.45),
+    0 0 60px rgba(52, 111, 255, 0.2);
+  z-index: -1;
+}
+
+.node-a { inset: 18% auto auto 19%; }
+.node-b { inset: 27% 20% auto auto; }
+.node-c { inset: auto auto 16% 24%; }
+.node-d { inset: auto 14% 20% auto; }
+
+/* =========================
+   Layout
+========================= */
+
+.page-shell {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+.hero-card {
+  width: 100%;
+  max-width: 760px;
+  text-align: center;
+  padding: 34px 20px 34px;
+  background: linear-gradient(180deg, rgba(16, 22, 38, 0.84), rgba(8, 12, 22, 0.78));
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.hero-topline {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.64);
+  margin-bottom: 18px;
+}
+
+/* =========================
+   Logo as main visual
+========================= */
+
+.logo-wrap {
+  position: relative;
+  width: min(270px, 68vw);
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.logo-glow {
+  position: absolute;
+  inset: -18px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(132, 232, 95, 0.18), transparent 36%),
+    radial-gradient(circle at 68% 50%, rgba(47, 101, 255, 0.28), transparent 48%);
+  filter: blur(26px);
+}
+
+.logo {
+  position: relative;
+  width: 100%;
+  display: block;
+  border-radius: 28px 28px 18px 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+
+/* =========================
+   Meta panel attached to logo
+========================= */
+
+.meta-panel {
+  width: min(270px, 68vw);
+  margin: -6px auto 0;
+  padding: 14px 16px 16px;
+  text-align: left;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: none;
+  border-radius: 0 0 18px 18px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.03),
+    0 8px 20px rgba(0,0,0,0.14);
+  position: relative;
+  z-index: 1;
+}
+
+.meta-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.84);
+}
+
+.meta-line + .meta-line {
+  margin-top: 6px;
+}
+
+.meta-icon {
+  width: 20px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* =========================
+   Title + invite copy
+========================= */
+
+.hero-title {
+  width: min(270px, 68vw);
+  margin: 24px auto 0;
+  font-size: clamp(1.55rem, 6vw, 2.35rem);
+  font-weight: 630;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.invite-copy {
+  margin: 14px 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.54);
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta-row {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+
+.join-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(270px, 68vw);
+  min-height: 56px;
+  padding: 0 18px;
+  text-decoration: none;
+  color: #070b14;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 16px;
+  background: #f5f8ff;
+  border: 1px solid rgba(255,255,255,0.85);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.join-btn:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 20px 12px;
+  }
+
+  .hero-card {
+    padding: 28px 16px 28px;
+    border-radius: 24px;
+  }
+
+  .hero-topline {
+    margin-bottom: 16px;
+    font-size: 11px;
+  }
+
+  .logo-wrap {
+    width: min(230px, 64vw);
+  }
+
+  .meta-panel {
+    width: min(230px, 64vw);
+    margin-top: -6px;
+    padding: 13px 14px 15px;
+  }
+
+  .meta-line {
+    gap: 9px;
+    font-size: 0.9rem;
+  }
+
+  .meta-icon {
+    width: 18px;
+    font-size: 0.95rem;
+  }
+
+ .hero-title {
+  width: min(230px, 64vw);
+  margin: 20px auto 0;
+  font-size: clamp(1.45rem, 7vw, 2.1rem);
+  font-weight: 630;
+  line-height: 1.08;
+}
+  .invite-copy {
+    margin-top: 12px;
+    font-size: 0.95rem;
+  }
+
+  .join-btn {
+    width: min(230px, 64vw);
+    min-height: 52px;
+    font-size: 0.98rem;
+    border-radius: 15px;
+  }
+}
